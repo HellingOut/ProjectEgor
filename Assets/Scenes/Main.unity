@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 26362488}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,7 +226,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e05c04e94cb7b3a478910e4172d98220, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -287,7 +287,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  rigidbody: {fileID: 26362486}
+  jumpPower: 10
+  TopSpeed: 10
+  stopPower: 5
 --- !u!1 &97523026
 GameObject:
   m_ObjectHideFlags: 0
