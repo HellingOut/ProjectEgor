@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -7,13 +8,15 @@ using UnityEngine.UIElements;
 
 public class player : MonoBehaviour
 {
-    public int speed = 10;
     private new Rigidbody2D rigidbody;
-    private bool isGrounded = false;
     private float horisontalDirection = 0;
+    private bool isGrounded = false;
+    public int speed = 10;
     public float jumpPower = 5;
-    public float TopSpeed = 10;
-    public float stopPower = 12;
+    public float topSpeed = 10;
+    public float stopPower = 11;
+    public float acceleration = 2;
+    public float angleToJumpScale = 0.5F;
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -26,8 +29,9 @@ public class player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Vector2 normal = collision.GetContact(0).normal;
-        if (normal == Vector2.up)
+        if (normal.y > angleToJumpScale)
             isGrounded = true;
+            print(normal.y);
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -41,14 +45,17 @@ public class player : MonoBehaviour
     void MoveByXAxis()
     {
         horisontalDirection = Input.GetAxis("Horizontal");
-        if (rigidbody is not null)
-            if (horisontalDirection != 0)
-                if (Mathf.Abs(rigidbody.linearVelocityX) < TopSpeed)
-                    rigidbody.AddForce(new Vector2(horisontalDirection * speed, 0));
-                else if (Mathf.Abs(rigidbody.linearVelocityX) > 0.1)
-                    rigidbody.linearVelocityX =
-                        Mathf.Lerp(rigidbody.linearVelocityX, 0, Time.deltaTime * stopPower);
-                else
-                    rigidbody.linearVelocityX = 0;
+        if (horisontalDirection != 0)
+            rigidbody.linearVelocityX = Mathf.Lerp(rigidbody.linearVelocityX, horisontalDirection * speed, Time.deltaTime * acceleration);
+        else if (Math.Abs(rigidbody.linearVelocityX) > 1)
+            rigidbody.linearVelocityX = Mathf.Lerp(rigidbody.linearVelocityX, 0, Time.deltaTime * stopPower);
+        else rigidbody.linearVelocityX = 0;
+
+
+
+
+
+
+
     }
 }
