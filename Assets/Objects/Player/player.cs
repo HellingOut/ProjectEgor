@@ -1,26 +1,20 @@
 using System;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.UIElements;
 
 public class player : MonoBehaviour
 {
     private new Rigidbody2D rigidbody;
-    private float horisontalDirection = 0;
-    private float verticalDirection = 0;
-    private bool isGrounded = false;
+    private Vector2 direction;
     private Vector2 collisionNormal;
     public int speed = 10;
     public float jumpPower = 5;
     public float topSpeed = 10;
     public float stopPower = 11;
     public float acceleration = 2;
-    public float angleToJumpScale = 0.5F;
+    public float minFloorAngle = 0.5F;
     public float friction = 1.5F;
-    
+    public Vector2 velocity = Vector2.zero;
+
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -29,43 +23,39 @@ public class player : MonoBehaviour
     {
         MoveByXAxis();
         MoveByYAxis();
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        collisionNormal = collision.GetContact(0).normal;
-        if (collisionNormal.y > angleToJumpScale){
-            isGrounded = true;            
-        }
-        if(collisionNormal.y <= 0){
-            rigidbody.linearVelocityY = 0;
-        }
-            print(collisionNormal.y);
-    }
-    private void OnCollisionStay2D(){
-        
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        collisionNormal = Vector2.zero;
-        isGrounded = false;
-        print("out");
+        MoveAndSlide();
     }
 
+    void MoveAndSlide()
+    {
+        Rigidbody2D.SlideResults slideResults = rigidbody.Slide(velocity, Time.deltaTime, new Rigidbody2D.SlideMovement());
+        collisionNormal = slideResults.surfaceHit.normal;
+    }
     void MoveByXAxis()
     {
-        horisontalDirection = Input.GetAxis("Horizontal");
-        if (horisontalDirection != 0)
-            rigidbody.linearVelocityX = Mathf.Lerp(rigidbody.linearVelocityX, horisontalDirection * speed, Time.deltaTime * acceleration);
-        else if (Math.Abs(rigidbody.linearVelocityX) > 1)
-            rigidbody.linearVelocityX = Mathf.Lerp(rigidbody.linearVelocityX, 0, Time.deltaTime * stopPower);
-        else rigidbody.linearVelocityX = 0;
+        direction.x = Input.GetAxis("Horizontal");
+        if (direction.x != 0)
+            velocity.x = Mathf.Lerp(velocity.x, direction.x * speed, Time.deltaTime * acceleration);
+        else if (Math.Abs(velocity.x) > 1)
+            velocity.x = Mathf.Lerp(velocity.x, 0, Time.deltaTime * stopPower);
+        else velocity.x = 0;
     }
-    void MoveByYAxis(){
-        verticalDirection = Input.GetAxis("Vertical");
-        if(verticalDirection != 0){
 
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-            rigidbody.linearVelocityY = jumpPower;
+    bool IsGrounded()
+    {
+        if (collisionNormal.y > minFloorAngle)
+            return true;
+        else
+            return false;
+    }
+
+    void MoveByYAxis(){
+        /*if (!IsGrounded())
+            velocity.y += Physics2D.gravity.y * Time.deltaTime;
+        else
+            velocity.y = 0;
+        */
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+            velocity.y = jumpPower;
     }
 }

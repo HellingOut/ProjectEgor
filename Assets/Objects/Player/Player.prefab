@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3490998161734701268}
   - component: {fileID: 5328798145404927787}
   - component: {fileID: 4353441835465839777}
-  - component: {fileID: 9038371397548007879}
+  - component: {fileID: 3204601613752818312}
   - component: {fileID: 8801866675664085474}
   m_Layer: 0
   m_Name: Player
@@ -101,13 +101,13 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e05c04e94cb7b3a478910e4172d98220, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -128,7 +128,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!50 &9038371397548007879
+--- !u!50 &3204601613752818312
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -136,25 +136,25 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6925001351124904784}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: e05c04e94cb7b3a478910e4172d98220, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &8801866675664085474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +172,8 @@ MonoBehaviour:
   topSpeed: 99.13
   stopPower: -3452.8
   acceleration: -1
+  angleToJumpScale: 0.5
+  friction: 1.5
 --- !u!1 &8889957109472876054
 GameObject:
   m_ObjectHideFlags: 0

@@ -550,6 +550,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3204601613752818312, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3204601613752818312, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
+      propertyPath: m_SleepingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3204601613752818312, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3490998161734701268, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.22430933
@@ -593,6 +605,30 @@ PrefabInstance:
     - target: {fileID: 6925001351124904784, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801866675664085474, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801866675664085474, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
+      propertyPath: topSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801866675664085474, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
+      propertyPath: jumpPower
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801866675664085474, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
+      propertyPath: stopPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801866675664085474, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
+      propertyPath: acceleration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9038371397548007879, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
