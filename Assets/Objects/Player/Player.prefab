@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4353441835465839777}
   - component: {fileID: 9038371397548007879}
   - component: {fileID: 8801866675664085474}
+  - component: {fileID: 2563565630606837809}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -167,11 +168,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217b097b795466f44908e211f112a10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  friction: {fileID: 0}
+  noFriction: {fileID: 0}
+  gravityScale: 1
   speed: -1
   jumpPower: 10
   topSpeed: 99.13
   stopPower: -3452.8
   acceleration: -1
+  angleToJumpScale: 0.5
+--- !u!111 &2563565630606837809
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6925001351124904784}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 0}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &8889957109472876054
 GameObject:
   m_ObjectHideFlags: 0
