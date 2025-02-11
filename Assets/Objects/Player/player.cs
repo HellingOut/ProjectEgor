@@ -12,8 +12,8 @@ using UnityEngine.UIElements;
 public class player : MonoBehaviour
 {
     private new Rigidbody2D rigidbody;
+    private new Collider2D collider;
     private Animator animator;
-    private Animation animation;
     public PhysicsMaterial2D friction;
     public PhysicsMaterial2D noFriction;
     private Vector2 normal = Vector2.zero;
@@ -31,15 +31,13 @@ public class player : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        rigidbody.sharedMaterial = friction;
-        animation = GetComponent<Animation>();
-        
-        
-        
+        collider = GetComponent<Collider2D>();
+        rigidbody.sharedMaterial = friction;        
     }
     void Update(){
         MoveByXAxis();
         MoveByYAxis();
+        print(normal.y);
     }
    // void Update()
     
@@ -48,7 +46,7 @@ public class player : MonoBehaviour
         normal = collision.GetContact(0).normal;
         if (normal.y > angleToJumpScale){
             isGrounded = true;   
-            animator.SetBool("Grounded",true);         
+            animator.SetBool("Grounded",isGrounded);         
         }
         if(normal.y <= 0 && !isGrounded){
             rigidbody.linearVelocityY = 
@@ -58,11 +56,22 @@ public class player : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {  
-        if(collision.gameObject.tag == "Surface"){
+       
             isGrounded = false;
-            animator.SetFloat("Jumping",rigidbody.linearVelocityY);
+            animator.SetBool("Grounded",isGrounded);    
+        
+        
+    }
+private void OnCollisionStay2D(Collision2D collision)
+{
+    if(collision.gameObject.tag == "Surface"){
+         normal = collision.GetContact(0).normal;
+        if (normal.y > angleToJumpScale){
+            isGrounded = true;   
+            animator.SetBool("Grounded",isGrounded);         
         }
     }
+}
 
     void MoveByXAxis()
     {
@@ -90,7 +99,7 @@ public class player : MonoBehaviour
             rigidbody.sharedMaterial = noFriction;
              animator.SetFloat("Jumping",rigidbody.linearVelocityY);
             isGrounded = false;
-            animator.SetBool("Grounded",false);
+            animator.SetBool("Grounded",isGrounded);
         }
         else
             animator.SetFloat("Jumping",rigidbody.linearVelocityY);
