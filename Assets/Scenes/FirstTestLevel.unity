@@ -688,6 +688,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8801866675664085474, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
+      propertyPath: sprint
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801866675664085474, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
       propertyPath: friction
       value: 
       objectReference: {fileID: 6200000, guid: e05c04e94cb7b3a478910e4172d98220, type: 2}
@@ -713,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 6200000, guid: 28b3c8a347bd683479ff4855e7d79190, type: 2}
     - target: {fileID: 8801866675664085474, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
       propertyPath: acceleration
-      value: 16
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9038371397548007879, guid: 4758187461c0d374c80c3a3279e23efc, type: 3}
       propertyPath: m_Material

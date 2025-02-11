@@ -21,9 +21,10 @@ public class player : MonoBehaviour
     private float verticalDirection = 0;
     private bool isGrounded = false;
     public float gravityScale = 1;
-    public int speed = 10;
+    public float speed = 10;
+    public float sprint = 5;
     public float jumpPower = 5;
-    public float topSpeed = 10;
+    public float topSpeed = 15;
     public float stopPower = 11;
     public float acceleration = 2;
     public float angleToJumpScale = 0.5F;
@@ -37,7 +38,6 @@ public class player : MonoBehaviour
     void Update(){
         MoveByXAxis();
         MoveByYAxis();
-        print(normal.y);
     }
    // void Update()
     
@@ -81,11 +81,20 @@ private void OnCollisionStay2D(Collision2D collision)
            rigidbody.linearVelocityX = Mathf.Lerp(rigidbody.linearVelocityX,0,Time.deltaTime* stopPower);
             animator.SetFloat("Walking",0);
         }
+        if(horisontalDirection != 0 && Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)){
+            DisableFriction();
+            rigidbody.linearVelocityX = Mathf.Lerp(rigidbody.linearVelocityX,
+                horisontalDirection * (speed + sprint), Time.deltaTime * acceleration);
+                animator.SetFloat("Walking",Mathf.Abs(horisontalDirection));
+        }
         if(horisontalDirection != 0){
             DisableFriction();
             rigidbody.linearVelocityX = Mathf.Lerp(rigidbody.linearVelocityX,
                 horisontalDirection * speed, Time.deltaTime * acceleration);
                 animator.SetFloat("Walking",Mathf.Abs(horisontalDirection));
+        }
+        if (rigidbody.linearVelocityX > topSpeed){
+            rigidbody.linearVelocityX = topSpeed;
         }
     }
     void MoveByYAxis(){
