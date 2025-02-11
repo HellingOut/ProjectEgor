@@ -85,13 +85,13 @@ private void OnCollisionStay2D(Collision2D collision)
             DisableFriction();
             rigidbody.linearVelocityX = Mathf.Lerp(rigidbody.linearVelocityX,
                 horisontalDirection * (speed + sprint), Time.deltaTime * acceleration);
-                animator.SetFloat("Walking",Mathf.Abs(horisontalDirection));
+                animator.SetFloat("Walking", Mathf.Abs(horisontalDirection));
         }
         if(horisontalDirection != 0){
             DisableFriction();
             rigidbody.linearVelocityX = Mathf.Lerp(rigidbody.linearVelocityX,
                 horisontalDirection * speed, Time.deltaTime * acceleration);
-                animator.SetFloat("Walking",Mathf.Abs(horisontalDirection));
+                animator.SetFloat("Walking", Mathf.Abs(horisontalDirection));
         }
         if (rigidbody.linearVelocityX > topSpeed){
             rigidbody.linearVelocityX = topSpeed;
@@ -106,12 +106,10 @@ private void OnCollisionStay2D(Collision2D collision)
             DisableFriction();
             rigidbody.linearVelocityY = jumpPower;
             rigidbody.sharedMaterial = noFriction;
-             animator.SetFloat("Jumping",rigidbody.linearVelocityY);
             isGrounded = false;
             animator.SetBool("Grounded",isGrounded);
         }
-        else
-            animator.SetFloat("Jumping",rigidbody.linearVelocityY);
+        animator.SetFloat("VelocityY",rigidbody.linearVelocityY);
     }
     void EnableFriction(){
         rigidbody.sharedMaterial = friction;
