@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 public class player : MonoBehaviour
 {
     private new Rigidbody2D rigidbody;
-    private new Collider2D collider;
+    private new SpriteRenderer spriteRenderer;
     private Animator animator;
     public PhysicsMaterial2D friction;
     public PhysicsMaterial2D noFriction;
@@ -21,18 +21,18 @@ public class player : MonoBehaviour
     private float verticalDirection = 0;
     private bool isGrounded = false;
     public float gravityScale = 1;
-    public float speed = 10;
-    public float sprint = 5;
+    public float speed = 3;
+    public float sprint = 2;
     public float jumpPower = 5;
     public float topSpeed = 15;
     public float stopPower = 11;
-    public float acceleration = 2;
+    public float acceleration = 15;
     public float angleToJumpScale = 0.5F;
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        collider = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody.sharedMaterial = friction;        
     }
     void Update(){
@@ -76,6 +76,11 @@ private void OnCollisionStay2D(Collision2D collision)
     void MoveByXAxis()
     {
         horisontalDirection = Input.GetAxis("Horizontal");
+        if(horisontalDirection > 0)
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        else if (horisontalDirection < 0){
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * -1 , transform.localScale.y, transform.localScale.z);
+        }
         if(horisontalDirection == 0){
             EnableFriction();
            rigidbody.linearVelocityX = Mathf.Lerp(rigidbody.linearVelocityX,0,Time.deltaTime* stopPower);
@@ -96,6 +101,7 @@ private void OnCollisionStay2D(Collision2D collision)
         if (rigidbody.linearVelocityX > topSpeed){
             rigidbody.linearVelocityX = topSpeed;
         }
+        
     }
     void MoveByYAxis(){
         verticalDirection = Input.GetAxis("Vertical");
