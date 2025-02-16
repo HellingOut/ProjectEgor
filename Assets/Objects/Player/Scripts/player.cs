@@ -56,8 +56,9 @@ public class player : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {  
-       
-            isGrounded = false;
+            if(isGrounded)
+                if(collision.gameObject.tag == "Surface")
+                    isGrounded = false;
             animator.SetBool("Grounded",isGrounded);    
         
         
