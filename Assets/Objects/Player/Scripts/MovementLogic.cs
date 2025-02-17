@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 public class player : MonoBehaviour
 {
     private new Rigidbody2D rigidbody;
-    private new SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
     private Animator animator;
     public PhysicsMaterial2D friction;
     public PhysicsMaterial2D noFriction;
